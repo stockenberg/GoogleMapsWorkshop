@@ -27,53 +27,10 @@
 </head>
 <body>
 
-<div id="map"></div>
 
 <script src="assets/js/jquery-3.3.1.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeNXafsoWjZuxiWSGo_pC0EXIM2YPfV1g"></script>
 <script src="assets/js/markerwithlabel.js"></script>
-<script>
-
-    var adresses = ['Dittrichring 10 04109 Leipzig', 'Marschnerstraße 14 04109 Leipzig'];
-
-    var map;
-
-    initMap();
-
-    function initMap() {
-
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            center: {lat: 51.3400481, lng: 12.3720687}
-        });
-
-        for (var i = 0; i < adresses.length; i++) {
-            $.ajax({
-                url: 'https://maps.googleapis.com/maps/api/geocode/json',
-                method: "get",
-                data: {'address': adresses[i], 'key': 'AIzaSyBeNXafsoWjZuxiWSGo_pC0EXIM2YPfV1g'}
-            }).done(function (res) {
-                console.log(res.results[0].geometry.location.lat);
-                console.log(res.results[0].geometry.location.lng);
-                var marker = new MarkerWithLabel({
-                    position: new google.maps.LatLng(res.results[0].geometry.location.lat, res.results[0].geometry.location.lng),
-                    map: map,
-                    labelContent: "SAE Leipzig Institute longtext",
-                    labelAnchor: new google.maps.Point(35, 42),
-                    labelClass: "labels", // the CSS class for the label
-                    labelStyle: {opacity: 1.0}
-                });
-            });
-        }
-
-
-    }
-
-
-</script>
-
-
-<script src="assets/js/script.js"></script>
 
 </body>
 </html>
